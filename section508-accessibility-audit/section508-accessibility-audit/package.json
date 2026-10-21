@@ -1,0 +1,14 @@
+{
+  "name": "section508-accessibility-audit",
+  "version": "1.0.0",
+  "description": "Section 508 / WCAG 2.1 AA accessibility testing project with axe-core, Playwright and PyTest",
+  "scripts": {
+    "test": "pytest",
+    "report": "python scripts/generate_report.py"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axe-core": "^4.14.0"
+  },
+  "private": true
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 508 Audit Report | Riverbend County Demo</title>
+<style>
+:root { --ink:#1c2430; --muted:#4f5b6b; --line:#d5dbe3; --bg:#f6f8fb; --navy:#1f3a5f;
+  --crit:#9b1c1c; --high:#b45309; --med:#1d4ed8; --ok:#166534; }
+* { box-sizing:border-box; }
+body { margin:0; font:15px/1.55 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; color:var(--ink); background:var(--bg); }
+header { background:var(--navy); color:#fff; padding:28px 16px; }
+header div, main { max-width:1080px; margin:0 auto; }
+header h1 { margin:0 0 4px; font-size:26px; } header p { margin:0; opacity:.9; }
+main { padding:24px 16px 48px; }
+h2 { font-size:19px; margin:32px 0 10px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; }
+.card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+.card b { display:block; font-size:28px; } .card span { color:var(--muted); font-size:13px; }
+.table-wrap { overflow-x:auto; background:#fff; border:1px solid var(--line); border-radius:8px; }
+table { border-collapse:collapse; width:100%; min-width:760px; font-size:14px; }
+th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { background:#eef2f7; }
+code { font-size:12.5px; word-break:break-word; }
+.pill { display:inline-block; padding:1px 8px; border-radius:99px; color:#fff; font-size:12px; font-weight:600; text-transform:capitalize; }
+.critical { background:var(--crit); } .serious, .high { background:var(--high); }
+.moderate, .medium { background:var(--med); } .minor, .low { background:var(--muted); }
+.note { color:var(--muted); font-size:14px; }
+</style></head>
+<body>
+<header><div><h1>Section 508 / WCAG 2.1 AA Audit</h1>
+<p>Riverbend County Benefits Application (fictional demo) · generated October 20, 2026 · axe-core 4.14.0</p></div></header>
+<main>
+<h2>Summary</h2>
+<div class="cards">
+  <div class="card"><b>19</b><span>defects logged (5 Critical · 9 High · 5 Medium)</span></div>
+  <div class="card"><b>8 of 19</b><span>found by automated axe scan alone</span></div>
+  <div class="card"><b>8 → 0</b><span>axe rule violations, before → after</span></div>
+  <div class="card"><b>19/19</b><span>defects fixed and verified</span></div>
+</div>
+<p class="note">Automated scanning caught 8 of 19 issues. The rest (placeholder-only labels,
+removed focus outlines, a keyboard-inaccessible submit control, color-only errors, vague links) needed keyboard
+testing, custom checks, and manual review, which is why a 508 audit can't stop at an automated scan.</p>
+
+<h2>Defect log</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">ID</th><th scope="col">Severity</th><th scope="col">Issue</th><th scope="col">WCAG</th>
+<th scope="col">Found by</th><th scope="col">Fix</th><th scope="col">Status</th></tr></thead>
+<tbody><tr><td>A11Y-004</td><td><span class='pill critical'>Critical</span></td><td>Text inputs use placeholder as their only label</td><td>1.3.1 Info and Relationships; 3.3.2 Labels or Instructions (A)</td><td>Custom PyTest check (axe did not flag)</td><td>Added visible &lt;label for&gt; elements; kept hints in aria-describedby</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-005</td><td><span class='pill critical'>Critical</span></td><td>County dropdown has no accessible name</td><td>4.1.2 Name, Role, Value (A)</td><td>axe (select-name)</td><td>Added &lt;label for=&quot;county&quot;&gt;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-011</td><td><span class='pill critical'>Critical</span></td><td>Focus indicator removed with outline:none</td><td>2.4.7 Focus Visible (AA)</td><td>Custom PyTest check</td><td>3px #c05600 :focus-visible outline</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-012</td><td><span class='pill critical'>Critical</span></td><td>Submit is a &lt;div&gt; with onclick</td><td>2.1.1 Keyboard; 4.1.2 Name, Role, Value (A)</td><td>Custom PyTest check</td><td>Replaced with &lt;button type=&quot;submit&quot;&gt;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-013</td><td><span class='pill critical'>Critical</span></td><td>Icon-only button has no accessible name</td><td>4.1.2 Name, Role, Value (A)</td><td>axe (button-name)</td><td>Replaced with text button &#x27;Help with household size&#x27;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-001</td><td><span class='pill high'>High</span></td><td>Page language not set</td><td>3.1.1 Language of Page (A)</td><td>axe (html-has-lang)</td><td>Added lang=&quot;en&quot;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-002</td><td><span class='pill high'>High</span></td><td>Page has no title</td><td>2.4.2 Page Titled (A)</td><td>axe (document-title)</td><td>Added &lt;title&gt;Benefits Application | Riverbend County (Demo)&lt;/title&gt;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-003</td><td><span class='pill high'>High</span></td><td>Logo image missing alt text</td><td>1.1.1 Non-text Content (A)</td><td>axe (image-alt)</td><td>alt=&quot;Riverbend County seal&quot;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-006</td><td><span class='pill high'>High</span></td><td>Duplicate id &#x27;name&#x27; on two inputs</td><td>4.1.1 Parsing (A)</td><td>Custom PyTest check</td><td>Email input renamed to id=&quot;email&quot;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-007</td><td><span class='pill high'>High</span></td><td>Insufficient color contrast</td><td>1.4.3 Contrast (Minimum) (AA)</td><td>axe (color-contrast)</td><td>Notice text #4a4a4a; button #1f3a5f with white text</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-010</td><td><span class='pill high'>High</span></td><td>No landmarks or skip link</td><td>2.4.1 Bypass Blocks (A)</td><td>Custom PyTest check</td><td>Added skip link and landmark elements</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-014</td><td><span class='pill high'>High</span></td><td>Focusable button hidden with aria-hidden</td><td>4.1.2 Name, Role, Value (A)</td><td>axe (aria-hidden-focus)</td><td>Removed aria-hidden; converted to disclosure button with aria-expanded</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-016</td><td><span class='pill high'>High</span></td><td>Errors shown by red border only</td><td>1.4.1 Use of Color; 3.3.1 Error Identification (A)</td><td>Custom PyTest check</td><td>Added per-field error text, aria-invalid, error summary</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-017</td><td><span class='pill high'>High</span></td><td>Error/confirmation messages not announced</td><td>4.1.3 Status Messages (AA)</td><td>Custom PyTest check</td><td>Error summary with role=alert; status region with role=status</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-008</td><td><span class='pill medium'>Medium</span></td><td>Heading levels skip from h1 to h4</td><td>1.3.1 Info and Relationships; 2.4.6 Headings and Labels (A / AA)</td><td>Custom PyTest check</td><td>Changed to &lt;h2&gt;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-009</td><td><span class='pill medium'>Medium</span></td><td>Visual heading is a styled &lt;div&gt;</td><td>1.3.1 Info and Relationships (A)</td><td>Manual code review (confirm with ANDI)</td><td>Changed to &lt;h2&gt;Household&lt;/h2&gt;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-015</td><td><span class='pill medium'>Medium</span></td><td>Ambiguous link text &#x27;click here&#x27;</td><td>2.4.4 Link Purpose (In Context) (A)</td><td>Custom PyTest check (axe did not flag)</td><td>&#x27;Read the eligibility rules for benefits&#x27;</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-018</td><td><span class='pill medium'>Medium</span></td><td>Data table has no header cells or caption</td><td>1.3.1 Info and Relationships (A)</td><td>Custom PyTest check</td><td>Added caption and scoped headers</td><td>Fixed - Verified</td></tr>
+<tr><td>A11Y-019</td><td><span class='pill medium'>Medium</span></td><td>Viewport meta disables zoom</td><td>1.4.4 Resize Text (AA)</td><td>axe (meta-viewport)</td><td>Removed zoom restrictions</td><td>Fixed - Verified</td></tr></tbody></table></div>
+
+<h2>Automated scan: before remediation</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Impact</th><th scope="col">Rule</th><th scope="col">Description</th><th scope="col">WCAG SC</th><th scope="col">Elements</th></tr></thead>
+<tbody><tr><td><span class='pill critical'>critical</span></td><td><code>button-name</code></td><td>Buttons must have discernible text</td><td>4.1.2</td><td><code>button:nth-child(8)</code></td></tr>
+<tr><td><span class='pill critical'>critical</span></td><td><code>image-alt</code></td><td>Images must have alternative text</td><td>1.1.1</td><td><code>img</code></td></tr>
+<tr><td><span class='pill critical'>critical</span></td><td><code>select-name</code></td><td>Select element must have an accessible name</td><td>4.1.2</td><td><code>#county</code></td></tr>
+<tr><td><span class='pill serious'>serious</span></td><td><code>aria-hidden-focus</code></td><td>ARIA hidden element must not be focusable or contain focusable elements</td><td>4.1.2</td><td><code>button[aria-hidden=&quot;true&quot;]</code></td></tr>
+<tr><td><span class='pill serious'>serious</span></td><td><code>color-contrast</code></td><td>Elements must meet minimum color contrast ratio thresholds</td><td>1.4.3</td><td><code>.notice<br>#submit</code></td></tr>
+<tr><td><span class='pill serious'>serious</span></td><td><code>document-title</code></td><td>Documents must have &lt;title&gt; element to aid in navigation</td><td>2.4.2</td><td><code>html</code></td></tr>
+<tr><td><span class='pill serious'>serious</span></td><td><code>html-has-lang</code></td><td>&lt;html&gt; element must have a lang attribute</td><td>3.1.1</td><td><code>html</code></td></tr>
+<tr><td><span class='pill moderate'>moderate</span></td><td><code>meta-viewport</code></td><td>Zooming and scaling must not be disabled</td><td>1.4.4</td><td><code>meta[name=&quot;viewport&quot;]</code></td></tr></tbody></table></div>
+
+<h2>Automated scan: after remediation</h2>
+<p>0 violations · 28 rules passed · 0 needing manual review.</p>
+</main></body></html>
